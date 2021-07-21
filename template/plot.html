@@ -1,12 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+  
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script>
+
+    let socket =new WebSocket('ws://localhost:8000/ws/polData/');
+    socket.onopen =function(e){
+        console.log('Connection established');
+    };
+
+    socket.onmessage = function(e){
+        console.log(e.data);
+        var recData=JSON.parse(e.data);
+
+        // for(let i=0; i<4;i++){
+        //     dataObjNew=dataObj['data']['datasets'][i]['data'];
+        //     dataObjNew.shift();
+        //     dataObjNew.push(recData.value[i]);
+        //     dataObj['data']['datasets'][i]['data']=dataObjNew;
+        // }
+        dataObjNew=dataObj['data']['datasets'][0]['data'];
+        dataObjNew.shift();
+        dataObjNew.push(recData.value[0]);
+        dataObj['data']['datasets'][0]['data']=dataObjNew;
+
+        dataObjNew=dataObj['data']['datasets'][1]['data'];
+        dataObjNew.shift();
+        dataObjNew.push(recData.value[1]);
+        dataObj['data']['datasets'][1]['data']=dataObjNew;
+
+        dataObjNew=dataObj['data']['datasets'][2]['data'];
+        dataObjNew.shift();
+        dataObjNew.push(recData.value[2]);
+        dataObj['data']['datasets'][2]['data']=dataObjNew;
+
+        dataObjNew=dataObj['data']['datasets'][3]['data'];
+        dataObjNew.shift();
+        dataObjNew.push(recData.value[3]);
+        dataObj['data']['datasets'][3]['data']=dataObjNew;
+        window.myLine.update();
+
+    };
+
+    socket.onclose = function(e){
+        alert('Connection CLosed');
+    };
+    
+    </script>
 <body>
-    hello world
+    <div style="max-width: 900px; max-height: 400px;">
+        <canvas id="myChart" width="900" height="400"></canvas>
+    </div>
 </body>
+    
+    <script>
+    var dataObj={
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6],
+            datasets: [{
+                label: 'c3 data',
+                data: [0,0,0,0,0,0],
+                borderColor:"red"
+            },
+            {
+                label: 'c4 data',
+                data: [0,0,0,0,0,0],
+                borderColor:"blue"
+            },
+            {
+                label: 'c5 data',
+                data: [0,0,0,0,0,0],
+                borderColor:"green"
+            },
+            {
+                label: 'c6data',
+                data: [0,0,0,0,0,0],
+                borderColor:"yellow"
+            },
+        ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    window.myLine = new Chart(ctx,dataObj );
+    </script>
 </html>
