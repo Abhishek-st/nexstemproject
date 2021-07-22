@@ -33,7 +33,7 @@ class DashConsumer(AsyncWebsocketConsumer):
             }
         )
 
-        print ('>>>>',text_data)
+        # print ('>>>>',text_data)
 
     async def processing(self,event):
         valOther=event['value']

@@ -12,13 +12,6 @@
     socket.onmessage = function(e){
         console.log(e.data);
         var recData=JSON.parse(e.data);
-
-        // for(let i=0; i<4;i++){
-        //     dataObjNew=dataObj['data']['datasets'][i]['data'];
-        //     dataObjNew.shift();
-        //     dataObjNew.push(recData.value[i]);
-        //     dataObj['data']['datasets'][i]['data']=dataObjNew;
-        // }
         dataObjNew=dataObj['data']['datasets'][0]['data'];
         dataObjNew.shift();
         dataObjNew.push(recData.value[0]);
@@ -47,35 +40,50 @@
     };
     
     </script>
+    <style>
+        body{
+            display:flex; flex-direction:column; justify-content:center;
+            min-height:100vh;           
+        }
+    </style>
 <body>
+    <center>
+    <div>
+        <h1>Live Data Plot</h1>
+    </div>
     <div style="max-width: 900px; max-height: 400px;">
         <canvas id="myChart" width="900" height="400"></canvas>
     </div>
+    </center>
 </body>
     
     <script>
+    var label = Array(30)
+    for(var i=0; i<30; i++){
+        label[i] = i+1;
+    }
     var dataObj={
         type: 'line',
         data: {
-            labels: [1,2,3,4,5,6],
+            labels: label,
             datasets: [{
                 label: 'c3 data',
-                data: [0,0,0,0,0,0],
+                data: Array(30).fill(1),
                 borderColor:"red"
             },
             {
                 label: 'c4 data',
-                data: [0,0,0,0,0,0],
+                data: Array(30).fill(2),
                 borderColor:"blue"
             },
             {
                 label: 'c5 data',
-                data: [0,0,0,0,0,0],
+                data: Array(30).fill(5),
                 borderColor:"green"
             },
             {
                 label: 'c6data',
-                data: [0,0,0,0,0,0],
+                data: Array(30).fill(7),
                 borderColor:"yellow"
             },
         ]

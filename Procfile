@@ -1,0 +1,1 @@
+web: gunicorn nexstem.asgi --log-file -
