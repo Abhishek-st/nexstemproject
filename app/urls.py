@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('plot', views.plot),
+    path('mlmodel', views.mlmodel),
 ]

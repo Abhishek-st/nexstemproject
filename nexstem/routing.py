@@ -6,6 +6,7 @@ from app import consumer
 
 websocket_urlPattern=[
     path('ws/polData/',consumer.DashConsumer.as_asgi()),
+    path('ws/prediction/', consumer.ModelPredictConsumer.as_asgi()),
 ]
 
 application=ProtocolTypeRouter({
