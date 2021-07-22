@@ -6,6 +6,10 @@ import time
 import csv
 
 ws=websocket.WebSocket()
+
+urldev = 'ws://localhost:8000/ws/polData/'
+urlprod = ''
+
 ws.connect('ws://localhost:8000/ws/polData/')
 
 

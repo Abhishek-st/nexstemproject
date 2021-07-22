@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-txh&36d$#d_$_w04%&w9&(j_dw=3x3vrxo8r)^yu5b+6t9i@gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'nexstemproject.herokuapp.com']
 
